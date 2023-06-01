@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pesquisa de Faixas</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center">Pesquisa de Faixas</h1>
+            <form method="POST" id="search-form" class="mt-4">
+                <div class="input-group">
+                    <input type="text" name="query" id="query-input" class="form-control" placeholder="Digite o nome da faixa">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Pesquisar</button>
+                    </div>
+                </div>
+            </form>
+    
+            <div id="track-info"></div>
+        </div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var query = document.getElementById('query-input').value;
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'query=' + encodeURIComponent(query)
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                var trackInfo = document.getElementById('track-info');
+                if (data.artist !== "N/A") {
+                    trackInfo.innerHTML = `
+                        <h2>Informações da Faixa</h2>
+                        <p><strong>Artista:</strong> ${data.artist}</p>
+                        <p><strong>Música:</strong> ${data.track}</p>
+                        <p><strong>Álbum:</strong> ${data.album}</p>
+                        <p><strong>Preço:</strong> ${data.price}</p>
+                    `;
+                } else {
+                    trackInfo.innerHTML = "<p>Nenhuma faixa encontrada.</p>";
+                }
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        });
+    </script>
+    
+</body>
+</html>

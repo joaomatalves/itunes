@@ -1,0 +1,48 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+  }
+  
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #track-info {
+    margin-top: 20px;
+  }
+  
+  #track-info h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  #track-info p {
+    margin: 5px 0;
+  }
+  
+  #error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
